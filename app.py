@@ -1,4 +1,5 @@
-from flask import Flask,request,render_template
+from flask import Flask,request,render_template,jsonify
+import json
 
 app=Flask(__name__)
 
@@ -6,22 +7,24 @@ app=Flask(__name__)
 def welcome():
     return "Welcome to Flask"
 
-@app.route('cal', methods=["GET"])
-def math_operation():
+@app.route('/cal', methods=["GET"])
+def math_operator():
     operation=request.json["operation"]
     number1=request.json["number1"]
     number2=request.json["number2"]
     
-    if operation=='add':
-        int(number1) + int(number2)
+    if operation=='Addition':
         result = int(number1) + int(number2)
-    elif operation =='multiply':
+    elif operation =='Multiplication':
         result = int(number1) * int(number2)
-    elif operation =='division':
+    elif operation =='Division':
         result = int(number1) / int(number2)
     else:
         result = int(number1) - int(number2)
-        
+    return "The Operation is {} and the Result is {}".format(operation,result) 
+
+
+
     
 
 print(__name__)
